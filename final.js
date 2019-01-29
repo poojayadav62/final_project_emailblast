@@ -11,6 +11,7 @@ var cfg = require('./config.json');
 var transporter = nodemailer.createTransport(cfg.gmails);
 var fs = require('fs')
 var empty = require('is-empty');
+var internetAvailable = require("internet-available");
 //***************Login section**********************
 
 var prompt = require('prompt');
@@ -70,7 +71,12 @@ prompt.get(prompt_attributes, function (err, result) {
 						}
 						else
 						{
+							internetAvailable().then(function(){
 							sendmail_fun(files,jsonContent);	
+							}).catch(function(){
+								errorlog.error("No internet");
+							});
+								
 							
 						}
 					}
@@ -123,7 +129,7 @@ prompt.get(prompt_attributes, function (err, result) {
 					return errorlog.error("error:"+err);
 				}
 				
-                successlog.info("mail is save in draft");
+                                successlog.info("mail is save in draft");
 				successlog.info("wating for new mail:");
 			});
 		  
@@ -147,5 +153,7 @@ function success(files,jsonContent){
 function fail(files,jsonContent){
 eventEmitter.emit('copyFileInDraft',files,jsonContent);
 }
+
+
 
 
