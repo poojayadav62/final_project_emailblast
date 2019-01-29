@@ -51,26 +51,26 @@ prompt.get(prompt_attributes, function (err, result) {
  {
 		if(username==cfg.login.user && password==cfg.login.pass) // authentication
 		{
-			
+			successlog.info("login success");
 			console.log("wating for new file:");
 			fs.watch(cfg.path.Mpath, function (event, files)
 			 {
 			   if(event=='change')
 					{
 					var content = fs.readFileSync(cfg.path.Mpath+files);
-						if(content.from!="" && content.to!="")
-						{
-						successlog.info("login success");
-						var jsonContent = JSON.parse(content);
-						sendmail_fun(files,jsonContent);
-						}
-						else if(content.isEmpty())
+						var jsonContent = JSON.parse(content)
+						if(empty(jsonContent))
 						{
 						errorlog.error("file is blank");
 						}
+					
+						else if(empty(jsonContent.to))
+						{
+						errorlog.error("reciever not found");
+						}
 						else
 						{
-							errorlog.error("address of sender or reciever missing");
+							sendmail_fun(files,jsonContent);	
 							
 						}
 					}
