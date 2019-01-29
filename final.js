@@ -2,8 +2,8 @@
 //**********************import section************************
 const winston = require('winston');
 const winstonRotator = require('winston-daily-rotate-file');
-var errorlog = require('./log/logger.js').errorlog;
-var successlog = require('./log/logger.js').successlog;
+var errorlog = require('./logger.js').errorlog;
+var successlog = require('./logger.js').successlog;
 var ob = require('./a.json');  
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
