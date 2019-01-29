@@ -1,0 +1,19 @@
+
+{
+	"gmails":{
+			  "service": "Gmail",
+			  "auth": {
+				"user": "poojahy62@gmail.com",
+				"pass": "poojahemant62"
+					  }
+			},
+	"path":{
+			"Mpath":"./MailBox/",
+			"Ipath":"./Inbox/",
+			"Dpath":"./Draft/"
+			},
+	"login":{
+			"user":"pooja",
+			"pass":"pooja123"
+			}
+}
